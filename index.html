@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Name - 简洁现代</title>
+  <style>
+    /* ========== 基础重置与变量 ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg, #e8f4fc 0%, #eef6fa 35%, #f2f5f9 70%, #f5f6f8 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.6;
+    }
+
+    /* ========== 主容器：最大宽度 + 居中 + 柔和阴影 ========== */
+    .page {
+      width: 100%;
+      max-width: 1000px;
+      padding: 2.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ========== 顶部区域 ========== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .brand {
+      flex: 1;
+      text-align: right;
+    }
+
+    .app-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+    }
+
+    .slogan {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    /* ========== 中间核心区域 ========== */
+    .main {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .main-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      font-size: 1.05rem;
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      background: #007AFF;
+      color: #fff !important;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0, 122, 255, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.45);
+    }
+
+    /* ========== 底部 Footer ========== */
+    .footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .footer-links {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: #007AFF;
+      text-decoration: none;
+      margin: 0 0.75rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    .copyright {
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 顶部：Logo + 品牌名 + Slogan -->
+    <header class="header">
+      <img src="logo.png" alt="Logo" class="logo">
+      <div class="brand">
+        <h1 class="app-name">App Name</h1>
+        <p class="slogan">简洁、现代，触手可及</p>
+      </div>
+    </header>
+
+    <!-- 中间核心区域 -->
+    <main class="main">
+      <h2 class="main-title">欢迎使用 App Name</h2>
+      <p class="intro">
+        这是一款极简风格的应用，专注于核心功能与体验。轻量、高效，助你事半功倍。
+      </p>
+      <a href="#" class="btn-download">Download on the App Store</a>
+    </main>
+
+    <!-- 底部：链接 + 版权 -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+      <p class="copyright">© 2026 App Name</p>
+    </footer>
+  </div>
+</body>
+</html>
