@@ -3,87 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service - App Name</title>
+  <title>用户协议</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg-dark: #0B0F1A;
+      --bg-mid: #12162A;
+      --cyan: #00E5FF;
+      --teal: #3AF0C3;
+      --text-primary: #E8ECF4;
+      --text-muted: #8B95A8;
+      --max-width: 800px;
     }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #e8f4fc 0%, #eef6fa 35%, #f2f5f9 70%, #f5f6f8 100%);
-      color: #333;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-mid) 50%, #0d1220 100%);
+      color: var(--text-primary);
       min-height: 100vh;
+      line-height: 1.7;
+    }
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+      padding: 0.75rem 0;
+    }
+    .header-inner {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      line-height: 1.6;
+      gap: 12px;
     }
-
-    .page {
-      width: 100%;
-      max-width: 800px;
-      background: rgba(255, 255, 255, 0.75);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    .header-inner a { text-decoration: none; color: inherit; }
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      object-fit: cover;
     }
+    .header-app-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .content p {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
+    main { padding: 1.5rem 0 3rem; }
     .back-link {
       display: inline-block;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      color: #007AFF;
+      color: var(--cyan);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s ease;
+      margin-bottom: 1.5rem;
     }
+    .back-link:hover { color: var(--teal); }
+    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .page-title-zh { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
 
-    .back-link:hover {
-      color: #0056b3;
-      text-decoration: underline;
+    .content {
+      background: rgba(18, 25, 45, 0.5);
+      border: 1px solid rgba(0, 229, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
     }
+    .content h3 { font-size: 1.1rem; color: var(--teal); margin: 1.5rem 0 0.5rem; }
+    .content h3:first-child { margin-top: 0; }
+    .content p, .content li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .content ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    main { padding-bottom: 2rem; }
   </style>
 </head>
 <body>
-  <div class="page">
-    <h1>Terms of Service</h1>
+  <div class="wrap">
+    <header>
+      <div class="header-inner">
+        <a href="index.html" id="header-link">
+          <img id="header-logo" class="header-logo" src="" alt="">
+        </a>
+        <span id="header-app-name" class="header-app-name"></span>
+      </div>
+    </header>
 
-    <div class="content">
-      <p>
-        Welcome to App Name. By accessing or using our application and services, you agree to be bound by these Terms of Service. Please read them carefully.
-      </p>
-      <p>
-        You must be at least 13 years of age (or the minimum age in your jurisdiction) to use this app. You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account.
-      </p>
-      <p>
-        You agree not to use the service for any unlawful purpose or in any way that could damage, disable, or impair the app or our infrastructure. We reserve the right to suspend or terminate access for violations of these terms.
-      </p>
-      <p>
-        These terms may be updated periodically. Your continued use after changes constitutes acceptance. For questions, please refer to our contact information on the main website.
-      </p>
-    </div>
-
-    <a href="index.html" class="back-link">← 返回首页</a>
+    <main>
+      <a href="index.html" class="back-link">← 返回首页</a>
+      <h1 class="page-title">Terms of Service</h1>
+      <p class="page-title-zh">用户协议</p>
+      <article class="content" id="terms-content"></article>
+    </main>
   </div>
+
+  <script>
+    // 与 index.html 中 APP_LIST 顺序一致（共 10 个）
+    var APP_NAMES = ['TravelSpeed Pro', 'FitPal 动起来', 'Notely 轻笔记', 'SkyCast 天气', 'Moment 相册', 'Pulse 心率', 'Budge 记账本', 'Lingo 背单词', 'Calm 冥想', 'Link 快捷'];
+    var APP_NAMES_ZH = ['旅行测速仪', '运动助手', '极简笔记', '精准天气', '智能相册', '心率健康', '随手记账', '每日单词', '正念冥想', '快捷指令'];
+    var APP_LOGOS = [
+      'images/logos/0.jpg',
+      'images/logos/1.jpg',
+      'images/logos/2.jpg',
+      'images/logos/3.jpg',
+      'images/logos/4.jpg',
+      'images/logos/5.jpg',
+      'images/logos/6.jpg',
+      'images/logos/7.jpg',
+      'images/logos/8.jpg',
+      'images/logos/9.jpg'
+    ];
+
+    var params = new URLSearchParams(window.location.search);
+    var appIndex = parseInt(params.get('app'), 10);
+    if (isNaN(appIndex) || appIndex < 0 || appIndex >= APP_NAMES.length) appIndex = 0;
+
+    var appName = APP_NAMES[appIndex];
+    var appLogo = APP_LOGOS[appIndex];
+
+    document.title = appName + ' - 用户协议';
+    document.getElementById('header-app-name').textContent = appName;
+    document.getElementById('header-logo').src = appLogo;
+    document.getElementById('header-logo').alt = appName;
+    document.getElementById('header-link').href = 'index.html';
+
+    /**
+     * 每个 App 的用户协议正文独立配置。
+     * 修改下方 TERMS_BY_APP[i] 即可更新第 i 个 App 的协议内容（i 从 0 到 9，与 APP_NAMES 顺序一致）。
+     */
+    var TERMS_BY_APP = [
+      '<p><strong>最后更新：</strong>本协议是您与「TravelSpeed Pro」之间关于使用本应用及相关服务的法律协议。请您仔细阅读。</p><h3>1. 接受条款</h3><p>下载、安装或使用本应用即表示您同意受本用户协议约束。若不同意，请勿使用本服务。</p><h3>2. 服务说明</h3><p>本应用提供与产品描述相符的功能与服务。我们保留在不另行通知的情况下修改、暂停或终止部分或全部服务的权利。</p><h3>3. 使用规范</h3><p>您同意合法、合规使用本应用，不得利用本应用从事任何违反法律法规或侵犯他人权益的行为。您须对使用本应用所产生的行为与内容负责。</p><h3>4. 知识产权</h3><p>本应用及相关内容的知识产权归我们或相关权利人所有。未经授权，您不得复制、修改、传播或用于商业目的。</p><h3>5. 免责声明</h3><p>在法律允许的范围内，本应用按「现状」提供，我们不保证服务不中断、无错误或完全安全。</p><h3>6. 协议变更与联系我们</h3><p>我们可能不时修订本协议。如对本协议有疑问，请通过应用内或官网提供的联系方式与我们联系。</p>',
+      '<p><strong>FitPal 动起来 用户协议</strong></p><p>欢迎使用 FitPal。使用本应用即表示您同意以下条款。</p><h3>一、服务内容</h3><p>FitPal 提供运动记录、计划与统计等功能。我们有权根据产品规划调整功能与界面。</p><h3>二、用户义务</h3><p>您应如实记录数据，不得利用本应用进行任何欺诈或误导行为。运动与健康相关数据仅供参考，不构成医疗建议。</p><h3>三、数据与隐私</h3><p>您的运动数据将按照我们的隐私政策处理。您可在设置中管理或删除数据。</p><h3>四、免责与责任限制</h3><p>因运动或使用本应用产生的任何身体损伤或损失，我们概不负责。请根据自身情况合理安排运动强度。</p><h3>五、条款更新</h3><p>我们可能更新本协议，重大变更将通过应用内通知或官网公布。</p>',
+      '<p><strong>Notely 轻笔记 服务条款</strong></p><p>请在使用 Notely 前阅读本条款。</p><h3>1. 协议接受</h3><p>使用本应用即表示您接受本服务条款及隐私政策。</p><h3>2. 服务范围</h3><p>Notely 提供笔记、待办与同步服务。我们不对因网络或设备问题导致的数据延迟或丢失承担责任，建议您重要内容另行备份。</p><h3>3. 用户内容</h3><p>您保留对您创建内容的所有权利。您授予我们为提供服务所必需的使用、存储与同步您内容的权利。</p><h3>4. 禁止行为</h3><p>您不得利用本应用存储或传播违法、侵权、淫秽或恶意内容。我们有权在发现违规时删除内容或终止您的账户。</p><h3>5. 免责与变更</h3><p>服务按「现状」提供。我们可能随时修订本条款，继续使用即视为接受修订。</p>',
+      '<p><strong>SkyCast 天气 用户协议</strong></p><p>本协议适用于您对 SkyCast 天气应用的使用。</p><h3>第一条 服务说明</h3><p>SkyCast 提供天气查询、预报及相关信息展示。数据来源于第三方，我们力求准确但不保证绝对无误。</p><h3>第二条 使用限制</h3><p>您仅可将本应用用于个人、非商业的天气查询用途。不得对数据进行批量抓取、转售或用于商业分析等未经授权的用途。</p><h3>第三条 免责</h3><p>天气数据仅供参考，不构成出行或生产决策依据。因依赖本应用数据而产生的任何损失，我们不予承担。</p><h3>第四条 协议修改</h3><p>我们保留修改本协议的权利。修改后将通过应用或官网公布。</p>',
+      '<p><strong>Moment 相册 使用条款</strong></p><p>使用 Moment 即表示您同意本使用条款。</p><h3>1. 服务描述</h3><p>Moment 提供相册整理、备份与回忆等功能。您上传或同步的照片与视频将按隐私政策处理。</p><h3>2. 您的内容</h3><p>您对您上传的内容保留完整权利。您需确保拥有相应权利且内容不侵犯他人权益或违反法律。</p><h3>3. 存储与安全</h3><p>我们采用行业通用措施保护您的数据。您应妥善保管账户信息，因您自身原因导致的泄露我们不承担责任。</p><h3>4. 服务变更与终止</h3><p>我们可能因业务调整暂停或终止部分服务，将尽可能提前通知。您可随时导出或删除您的数据。</p><h3>5. 其他</h3><p>本条款未约定事项以隐私政策及适用法律为准。</p>',
+      '<p><strong>Pulse 心率 用户协议</strong></p><p>本协议适用于 Pulse 心率应用及相关健康监测功能。</p><h3>1. 重要声明</h3><p>Pulse 及本应用内的心率、健康数据仅供个人参考与趋势观察，不构成医疗诊断、治疗建议或健康建议。如有健康疑虑，请咨询专业医疗机构。</p><h3>2. 服务内容</h3><p>我们提供心率记录、统计与展示功能。数据可能来自设备传感器或第三方穿戴设备，准确性受硬件与使用方式影响。</p><h3>3. 用户责任</h3><p>您应正确佩戴或使用设备，并理解数据可能存在误差。您不得依据本应用数据自行用药或改变治疗方案。</p><h3>4. 免责</h3><p>因使用或依赖本应用及其中数据而产生的任何健康或人身损害，我们均不承担责任。</p><h3>5. 条款更新</h3><p>我们可能更新本协议，请定期查阅。</p>',
+      '<p><strong>Budge 记账本 服务协议</strong></p><p>欢迎使用 Budge。使用本应用即表示您同意本协议。</p><h3>一、服务性质</h3><p>Budge 为个人记账与预算管理工具。我们不对您录入的数据真实性负责，也不对您基于本应用做出的财务决策负责。</p><h3>二、数据存储</h3><p>当前版本数据以本地存储为主。您需自行做好备份。我们可能在未来提供云同步，届时将另行说明数据政策。</p><h3>三、使用规范</h3><p>您不得利用本应用进行洗钱、欺诈等违法活动。我们有权配合监管部门依法提供相关信息。</p><h3>四、免责与变更</h3><p>因设备故障、误操作或未备份导致的数据丢失，我们无法负责。我们可能更新本协议与服务功能。</p>',
+      '<p><strong>Lingo 背单词 用户条款</strong></p><p>使用 Lingo 即表示您接受以下条款。</p><h3>1. 服务说明</h3><p>Lingo 提供词汇学习、复习与词书服务。词库与例句可能来自公开或授权来源，我们尊重知识产权。</p><h3>2. 学习内容</h3><p>学习进度与生词本等数据可能存储在您的设备或我们的服务器。具体见隐私政策。</p><h3>3. 使用限制</h3><p>您仅可将本应用用于个人学习。禁止对词库、例句等进行批量导出、再分发或商业使用。</p><h3>4. 免责</h3><p>学习效果因人而异，我们不对学习成果作任何保证。内容如有错误或更新，以应用内为准。</p><h3>5. 协议变更</h3><p>我们可能修订本条款，修订后将通过应用或官网公布。</p>',
+      '<p><strong>Calm 冥想 使用协议</strong></p><p>感谢使用 Calm。请在使用前阅读本协议。</p><h3>1. 服务内容</h3><p>Calm 提供冥想指导、呼吸练习、白噪音等内容。这些内容仅供放松与心理健康辅助，不替代专业医疗或心理咨询。</p><h3>2. 健康声明</h3><p>如有严重心理或生理不适，请及时就医。本应用不能替代专业诊断与治疗。</p><h3>3. 内容使用</h3><p>应用内音频、文本等内容的版权归我们或权利人所有。您仅可在个人范围内使用，不得复制、传播或商用。</p><h3>4. 免责</h3><p>因使用本应用或依赖其中内容而产生的任何身心状况变化或损失，我们不予承担责任。</p><h3>5. 更新与联系</h3><p>我们可能更新本协议。如有疑问请联系我们。</p>',
+      '<p><strong>Link 快捷 服务条款</strong></p><p>本条款适用于 Link 快捷指令应用。</p><h3>1. 功能说明</h3><p>Link 允许您创建与运行自定义快捷指令与自动化流程。您对您创建的指令及执行结果负责。</p><h3>2. 系统权限</h3><p>部分指令可能需调用系统或第三方应用权限（如位置、通知、剪贴板等）。我们仅在您授权且执行指令时使用相应权限。</p><h3>3. 禁止用途</h3><p>您不得利用本应用从事违法活动、干扰其他应用或系统、或对他人设备或数据实施未授权操作。</p><h3>4. 稳定性与数据</h3><p>自动化依赖系统与第三方接口，我们无法保证所有场景下均可用。因指令执行导致的数据变更或损失需由您自行承担。</p><h3>5. 条款变更</h3><p>我们可能修订本条款，请以应用内或官网最新版本为准。</p>'
+    ];
+
+    var content = TERMS_BY_APP[appIndex] != null ? TERMS_BY_APP[appIndex] : TERMS_BY_APP[0];
+    document.getElementById('terms-content').innerHTML = content;
+  </script>
 </body>
 </html>

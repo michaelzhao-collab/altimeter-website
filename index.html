@@ -3,172 +3,979 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Name - 简洁现代</title>
+  <title>TravelSpeed Pro - 旅行测速仪</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ========== 基础重置与变量 ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #e8f4fc 0%, #eef6fa 35%, #f2f5f9 70%, #f5f6f8 100%);
-      color: #333;
+      font-family: 'Inter', -apple-system, sans-serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      color: #e2e8f0;
       line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* ========== 主容器：最大宽度 + 居中 + 柔和阴影 ========== */
-    .page {
-      width: 100%;
-      max-width: 1000px;
-      padding: 2.5rem 1.5rem;
-      background: rgba(255, 255, 255, 0.75);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    /* ==================== 主题变量（10 套风格，每 App 对应一套） ==================== */
+    body[data-theme="tech-cyan"] {
+      --bg-primary: #0a0e17;
+      --bg-hero: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+      --accent: #00d4ff;
+      --accent-2: #0891b2;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(15, 23, 42, 0.8);
+      --card-border: rgba(0, 212, 255, 0.2);
+    }
+    body[data-theme="violet-glass"] {
+      --bg-primary: #0f0a1a;
+      --bg-hero: linear-gradient(180deg, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+      --accent: #a78bfa;
+      --accent-2: #7c3aed;
+      --text: #f1f5f9;
+      --text-muted: #a1a1aa;
+      --card-bg: rgba(30, 27, 75, 0.6);
+      --card-border: rgba(167, 139, 250, 0.25);
+    }
+    body[data-theme="amber-lines"] {
+      --bg-primary: #0c0a09;
+      --bg-hero: linear-gradient(160deg, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+      --accent: #f59e0b;
+      --accent-2: #d97706;
+      --text: #fafaf9;
+      --text-muted: #a8a29e;
+      --card-bg: rgba(28, 25, 23, 0.85);
+      --card-border: rgba(245, 158, 11, 0.2);
+    }
+    body[data-theme="teal-space"] {
+      --bg-primary: #021211;
+      --bg-hero: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(20, 184, 166, 0.15), transparent 50%);
+      --accent: #2dd4bf;
+      --accent-2: #0d9488;
+      --text: #ccfbf1;
+      --text-muted: #99f6e4;
+      --card-bg: rgba(19, 78, 74, 0.3);
+      --card-border: rgba(45, 212, 191, 0.25);
+    }
+    body[data-theme="rose-minimal"] {
+      --bg-primary: #1a0a12;
+      --bg-hero: linear-gradient(180deg, rgba(244, 63, 94, 0.08) 0%, transparent 50%);
+      --accent: #fb7185;
+      --accent-2: #e11d48;
+      --text: #fce7f3;
+      --text-muted: #f9a8d4;
+      --card-bg: rgba(50, 20, 35, 0.7);
+      --card-border: rgba(251, 113, 133, 0.25);
+    }
+    body[data-theme="coral-sunset"] {
+      --bg-primary: #1a0f0a;
+      --bg-hero: linear-gradient(180deg, rgba(251, 146, 60, 0.1) 0%, transparent 45%);
+      --accent: #fb923c;
+      --accent-2: #ea580c;
+      --text: #fff7ed;
+      --text-muted: #fed7aa;
+      --card-bg: rgba(67, 30, 15, 0.75);
+      --card-border: rgba(251, 146, 60, 0.25);
+    }
+    body[data-theme="mint-fresh"] {
+      --bg-primary: #052018;
+      --bg-hero: linear-gradient(160deg, rgba(52, 211, 153, 0.12) 0%, transparent 55%);
+      --accent: #34d399;
+      --accent-2: #10b981;
+      --text: #d1fae5;
+      --text-muted: #a7f3d0;
+      --card-bg: rgba(6, 45, 35, 0.7);
+      --card-border: rgba(52, 211, 153, 0.3);
+    }
+    body[data-theme="navy-gold"] {
+      --bg-primary: #0a0e1a;
+      --bg-hero: linear-gradient(180deg, rgba(250, 204, 21, 0.08) 0%, transparent 50%);
+      --accent: #facc15;
+      --accent-2: #eab308;
+      --text: #fef9c3;
+      --text-muted: #fde047;
+      --card-bg: rgba(30, 33, 50, 0.8);
+      --card-border: rgba(250, 204, 21, 0.25);
+    }
+    body[data-theme="dark-rose"] {
+      --bg-primary: #1c0a12;
+      --bg-hero: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(190, 24, 93, 0.2), transparent);
+      --accent: #ec4899;
+      --accent-2: #be185d;
+      --text: #fdf2f8;
+      --text-muted: #fbcfe8;
+      --card-bg: rgba(55, 15, 35, 0.75);
+      --card-border: rgba(236, 72, 153, 0.3);
+    }
+    body[data-theme="electric-blue"] {
+      --bg-primary: #0c1220;
+      --bg-hero: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+      --accent: #60a5fa;
+      --accent-2: #3b82f6;
+      --text: #dbeafe;
+      --text-muted: #93c5fd;
+      --card-bg: rgba(15, 30, 60, 0.8);
+      --card-border: rgba(96, 165, 250, 0.3);
     }
 
-    /* ========== 顶部区域 ========== */
-    .header {
+    /* ==================== 通用背景层 ==================== */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* 风格 1：科技蓝 - 网格线 + 渐变 */
+    body[data-theme="tech-cyan"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0a0e17 0%, #0f172a 50%, #0a0e17 100%);
+    }
+    body[data-theme="tech-cyan"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridScroll 30s linear infinite;
+    }
+    @keyframes gridScroll {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(0, 40px); }
+    }
+
+    /* 风格 2：紫罗兰 - 柔光球 */
+    body[data-theme="violet-glass"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0f0a1a 0%, #1e1b4b 40%, #0f0a1a 100%);
+    }
+    body[data-theme="violet-glass"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      filter: blur(60px);
+    }
+
+    /* 风格 3：琥珀 - 斜线 + 色块 */
+    body[data-theme="amber-lines"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0c0a09 0%, #1c1917 50%, #0c0a09 100%);
+    }
+    body[data-theme="amber-lines"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 40%, rgba(245, 158, 11, 0.04) 41%, rgba(245, 158, 11, 0.04) 44%, transparent 45%);
+      background-size: 120px 120px;
+    }
+
+    /* 风格 4：青绿太空 - 点阵/星空感 */
+    body[data-theme="teal-space"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #021211 0%, #0f2e2c 40%, #021211 100%);
+    }
+    body[data-theme="teal-space"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(2px 2px at 20px 30px, rgba(45, 212, 191, 0.4), transparent),
+                        radial-gradient(2px 2px at 40px 70px, rgba(45, 212, 191, 0.3), transparent),
+                        radial-gradient(2px 2px at 50px 160px, rgba(45, 212, 191, 0.35), transparent);
+      background-size: 200px 200px;
+      animation: twinkle 8s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* 风格 5：玫瑰极简 - 细线 + 渐变光带 */
+    body[data-theme="rose-minimal"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #1a0a12 0%, #2e0a1a 40%, #1a0a12 100%);
+    }
+    body[data-theme="rose-minimal"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 45%, rgba(251, 113, 133, 0.06) 46%, rgba(251, 113, 133, 0.06) 49%, transparent 50%);
+      background-size: 80px 80px;
+    }
+
+    /* 风格 6：暖阳珊瑚 */
+    body[data-theme="coral-sunset"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #1a0f0a 0%, #2a1510 40%, #1a0f0a 100%);
+    }
+    body[data-theme="coral-sunset"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 146, 60, 0.18) 0%, transparent 65%);
+      bottom: -150px;
+      left: -100px;
+      filter: blur(50px);
+    }
+
+    /* 风格 7：薄荷清新 */
+    body[data-theme="mint-fresh"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #052018 0%, #0d3328 50%, #052018 100%);
+    }
+    body[data-theme="mint-fresh"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* 风格 8：深蓝鎏金 */
+    body[data-theme="navy-gold"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0a0e1a 0%, #1e293b 40%, #0a0e1a 100%);
+    }
+    body[data-theme="navy-gold"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(60deg, transparent 48%, rgba(250, 204, 21, 0.05) 49%, rgba(250, 204, 21, 0.05) 51%, transparent 52%);
+      background-size: 100px 100px;
+    }
+
+    /* 风格 9：暗夜玫瑰 */
+    body[data-theme="dark-rose"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #1c0a12 0%, #3f0a1f 35%, #1c0a12 100%);
+    }
+    body[data-theme="dark-rose"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(1.5px 1.5px at 30px 40px, rgba(236, 72, 153, 0.5), transparent),
+                        radial-gradient(1.5px 1.5px at 80px 120px, rgba(236, 72, 153, 0.35), transparent);
+      background-size: 150px 150px;
+      animation: twinkle 6s ease-in-out infinite;
+    }
+
+    /* 风格 10：电光蓝 */
+    body[data-theme="electric-blue"] .bg-layer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0c1220 0%, #1e3a5f 40%, #0c1220 100%);
+    }
+    body[data-theme="electric-blue"] .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(59, 130, 246, 0.06) 0%, transparent 2px, transparent 98%, rgba(59, 130, 246, 0.06) 100%);
+      background-size: 100% 24px;
+      animation: gridScroll 25s linear infinite;
+    }
+
+    /* ==================== 布局与容器 ==================== */
+    .page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ==================== 左上角：App Logo + 名称 ==================== */
+    .top-bar {
+      padding: 20px 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      gap: 12px;
     }
-
-    .logo {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    .top-bar .app-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
-
-    .brand {
-      flex: 1;
-      text-align: right;
-    }
-
-    .app-name {
-      font-size: 1.75rem;
+    .top-bar .app-name {
+      font-size: 1.2rem;
       font-weight: 700;
-      color: #1a1a1a;
+      color: var(--text);
       letter-spacing: -0.02em;
     }
 
-    .slogan {
-      font-size: 0.95rem;
-      color: #666;
-      margin-top: 0.25rem;
-      font-weight: 400;
+    /* ==================== App 切换入口（右上角，自定义下拉仅向下展开） ==================== */
+    .app-switcher {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-switcher label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .app-dropdown {
+      position: relative;
+    }
+    .app-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 180px;
+      padding: 8px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+    .app-dropdown-trigger:hover,
+    .app-dropdown-trigger:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+      outline: none;
+    }
+    .app-dropdown-trigger::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--text-muted);
+      flex-shrink: 0;
+    }
+    .app-dropdown-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 4px;
+      min-width: 100%;
+      max-height: 70vh;
+      overflow-y: auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      display: none;
+    }
+    .app-dropdown-panel.open {
+      display: block;
+    }
+    .app-dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 10px 14px;
+      text-align: left;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .app-dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .app-dropdown-item.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--accent);
+    }
+    .app-dropdown-item:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* ========== 中间核心区域 ========== */
-    .main {
+    /* ==================== Hero 区（10 套风格微调） ==================== */
+    .hero {
+      flex: 1;
+      padding: 40px 0 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      margin-bottom: 4rem;
+    }
+    body[data-theme="amber-lines"] .hero { align-items: flex-start; text-align: left; }
+    body[data-theme="rose-minimal"] .hero .hero-intro {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 20px 24px;
+      border-radius: 16px;
     }
 
-    .main-title {
-      font-size: 2.5rem;
+    .hero .hero-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    body[data-theme="violet-glass"] .hero .hero-logo {
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(139, 92, 246, 0.3);
+    }
+
+    .hero .hero-title {
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 1rem;
       letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    body[data-theme="tech-cyan"] .hero .hero-title {
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    body[data-theme="violet-glass"] .hero .hero-title { color: #f1f5f9; text-shadow: 0 0 40px rgba(139, 92, 246, 0.3); }
+    body[data-theme="amber-lines"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="teal-space"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="rose-minimal"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="coral-sunset"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="mint-fresh"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="navy-gold"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="dark-rose"] .hero .hero-title { color: var(--accent); }
+    body[data-theme="electric-blue"] .hero .hero-title { color: var(--accent); }
+
+    .hero .hero-slogan {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
     }
 
-    .intro {
-      font-size: 1.05rem;
-      color: #555;
-      max-width: 520px;
-      margin: 0 auto 2rem;
+    .hero .hero-intro {
+      max-width: 640px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
     }
+    body[data-theme="violet-glass"] .hero .hero-intro {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 24px 28px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+    }
+    body[data-theme="amber-lines"] .hero .hero-intro { max-width: 560px; }
 
-    .btn-download {
-      display: inline-block;
-      padding: 0.9rem 1.8rem;
-      background: #007AFF;
-      color: #fff !important;
-      text-decoration: none;
+    .hero .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    body[data-theme="amber-lines"] .hero .hero-btns { justify-content: flex-start; }
+
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
       font-size: 1rem;
       font-weight: 600;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0, 122, 255, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-download:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.45);
-    }
-
-    /* ========== 底部 Footer ========== */
-    .footer {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      font-size: 0.9rem;
-      color: #888;
-    }
-
-    .footer-links {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-links a {
-      color: #007AFF;
+      font-family: inherit;
+      border-radius: 16px;
       text-decoration: none;
-      margin: 0 0.75rem;
-      transition: color 0.2s ease;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-dl svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .btn-dl:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+    .btn-dl.ios {
+      background: linear-gradient(180deg, #f5f5f7, #e8e8ed);
+      color: #1d1d1f;
+    }
+    .btn-dl.android {
+      background: linear-gradient(180deg, #3ddc84, #2ca85a);
+      color: #0d0d0d;
     }
 
-    .footer-links a:hover {
-      color: #0056b3;
-      text-decoration: underline;
+    /* 截图区：横向滚动，无截图时不占位 */
+    .hero-screens {
+      width: 100%;
+      margin-top: 24px;
+      padding-bottom: 16px;
+    }
+    .hero-screens-inner {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 8px 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .hero-screens-inner .screen-item {
+      flex: 0 0 auto;
+      width: 220px;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .hero-screens-inner .screen-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 16px;
+      vertical-align: top;
     }
 
-    .copyright {
-      font-size: 0.85rem;
+    /* ==================== Footer：仅协议与联系 ==================== */
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--card-border);
+      text-align: center;
     }
+    footer .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+      font-size: 0.9rem;
+    }
+    footer .footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer .footer-links a:hover { text-decoration: underline; }
+    footer .copy {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    footer .contact-copy { cursor: pointer; }
+    footer .contact-copy:hover { text-decoration: underline; }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .toast.show { opacity: 1; visibility: visible; }
   </style>
 </head>
-<body>
+<body data-theme="tech-cyan">
+  <div class="bg-layer"></div>
+  <div id="toast" class="toast" aria-live="polite">邮箱复制成功</div>
+
   <div class="page">
-    <!-- 顶部：Logo + 品牌名 + Slogan -->
-    <header class="header">
-      <img src="logo.png" alt="Logo" class="logo">
-      <div class="brand">
-        <h1 class="app-name">App Name</h1>
-        <p class="slogan">简洁、现代，触手可及</p>
+    <!-- 左上角：当前 App Logo + 名称 -->
+    <header class="top-bar">
+      <img id="top-logo" class="app-logo" src="" alt="">
+      <span id="top-name" class="app-name"></span>
+      <div class="app-switcher">
+        <label>切换 App</label>
+        <div class="app-dropdown" id="app-dropdown">
+          <button type="button" class="app-dropdown-trigger" id="app-dropdown-trigger" aria-label="选择要查看的 App" aria-haspopup="listbox" aria-expanded="false">请选择</button>
+          <div class="app-dropdown-panel" id="app-dropdown-panel" role="listbox" aria-hidden="true"></div>
+        </div>
       </div>
     </header>
 
-    <!-- 中间核心区域 -->
-    <main class="main">
-      <h2 class="main-title">欢迎使用 App Name</h2>
-      <p class="intro">
-        这是一款极简风格的应用，专注于核心功能与体验。轻量、高效，助你事半功倍。
-      </p>
-      <a href="#" class="btn-download">Download on the App Store</a>
+    <main class="hero">
+      <img id="hero-logo" class="hero-logo" src="" alt="">
+      <h1 id="hero-title" class="hero-title"></h1>
+      <p id="hero-slogan" class="hero-slogan"></p>
+      <p id="hero-intro" class="hero-intro" style="display: none;"></p>
+      <div id="hero-btns" class="hero-btns"></div>
+      <div id="hero-screens" class="hero-screens" style="display: none;">
+        <div id="hero-screens-inner" class="hero-screens-inner"></div>
+      </div>
     </main>
 
-    <!-- 底部：链接 + 版权 -->
-    <footer class="footer">
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
-      <p class="copyright">© 2026 App Name</p>
+    <footer>
+      <p class="footer-links" id="footer-links"></p>
+      <p class="copy" id="footer-copy"></p>
     </footer>
   </div>
+
+  <script>
+    function showToast() {
+      var el = document.getElementById('toast');
+      el.classList.add('show');
+      setTimeout(function () { el.classList.remove('show'); }, 2000);
+    }
+    /**
+     * ==================== 【替换 App 数据】仅在此处维护 ====================
+     * 10 个 App 与 10 套风格一一对应（App 索引 i 对应 THEMES[i]）。
+     * 新增或调整 App 时，请同步修改 terms.html 的 APP_NAMES/APP_LOGOS 与 TERMS_BY_APP，
+     * 以及 privacy.html 的 APP_NAMES/APP_LOGOS 与 PRIVACY_BY_APP，保证每个 App 有独立协议正文。
+     */
+
+    /** 主域名打开时默认显示的 App（0=第1个，1=第2个，…，9=第10个）。可通过 URL 参数 ?app=数字 覆盖。 */
+    var DEFAULT_APP_INDEX = 4;
+
+    var THEMES = ['tech-cyan', 'violet-glass', 'amber-lines', 'teal-space', 'rose-minimal', 'coral-sunset', 'mint-fresh', 'navy-gold', 'dark-rose', 'electric-blue'];
+
+    var APP_LIST = [
+      {
+        name: 'TravelSpeed Pro',
+        nameZh: '旅行测速仪',
+        logo: 'images/logos/0.jpg',
+        slogan: 'Track Every Journey. Measure Every Moment. 记录每一程，丈量每一刻。',
+        intro: 'TravelSpeed Pro 是一款面向旅行与出行场景的专业测速与行程记录应用。无论驾车、骑行还是徒步，实时速度、轨迹与里程统计一目了然；历史行程可随时回顾与导出，让每一程都有据可查。我们注重隐私与性能：在满足测速与记录需求的前提下，尽可能在设备端处理数据，界面简洁、操作顺手，助你更专注旅途本身。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/0-1.jpg', 'images/screens/0-2.jpg', 'images/screens/0-3.jpg', 'images/screens/0-4.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@travelspeed.example.com',
+        copyText: '© 2026 TravelSpeed Pro. All rights reserved.'
+      },
+      {
+        name: 'FitPal 动起来',
+        nameZh: '运动助手',
+        logo: 'images/logos/1.jpg',
+        slogan: 'Your daily fitness companion. 每日运动，轻松坚持。',
+        intro: 'FitPal 专注运动记录与习惯养成。支持步数、跑步、骑行等多种类型，配合智能提醒与周月统计，让运动数据一目了然。简洁界面与无广告体验，助你轻松坚持每日锻炼，达成健康目标。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/1-1.jpg', 'images/screens/1-2.jpg', 'images/screens/1-3.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@fitpal.example.com',
+        copyText: '© 2026 FitPal. All rights reserved.'
+      },
+      {
+        name: 'Notely 轻笔记',
+        nameZh: '极简笔记',
+        logo: 'images/logos/2.jpg',
+        slogan: 'Capture ideas, anytime anywhere. 随时记录，随时回顾。',
+        intro: 'Notely 是一款极简笔记与待办应用。支持 Markdown、标签与多端云同步，专注写作与知识整理。快速捕捉灵感、管理任务、构建个人知识库，让思考与记录更加高效。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/2-1.jpg', 'images/screens/2-2.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@notely.example.com',
+        copyText: '© 2026 Notely. All rights reserved.'
+      },
+      {
+        name: 'SkyCast 天气',
+        nameZh: '精准天气',
+        logo: 'images/logos/3.jpg',
+        slogan: 'Accurate forecast, beautiful design. 精准预报，简洁美观。',
+        intro: 'SkyCast 提供实时天气与多日预报，空气质量、降水概率、穿衣建议一目了然。界面简洁美观，无冗余信息，为你每一天的出行与穿衣提供可靠参考。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/3-1.jpg', 'images/screens/3-2.jpg', 'images/screens/3-3.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@skycast.example.com',
+        copyText: '© 2026 SkyCast. All rights reserved.'
+      },
+      {
+        name: 'Moment 相册',
+        nameZh: '智能相册',
+        logo: 'images/logos/4.jpg',
+        slogan: 'Your photos, beautifully organized. 智能整理，美好回忆。',
+        intro: 'Moment 是智能相册与备份工具。人脸识别、地点分类、回忆精选，让海量照片井井有条。安全备份与跨设备同步，珍贵瞬间随时可回顾。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/4-1.jpg', 'images/screens/4-2.jpg', 'images/screens/4-3.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@moment.example.com',
+        copyText: '© 2026 Moment. All rights reserved.'
+      },
+      {
+        name: 'Pulse 心率',
+        nameZh: '心率健康',
+        logo: 'images/logos/5.jpg',
+        slogan: 'Know your heart. 了解心跳，关注健康。',
+        intro: 'Pulse 专注心率监测与健康趋势。配合穿戴设备或手机传感器，记录静息与运动心率，生成日报周报，助你了解身体状态。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/5-1.jpg', 'images/screens/5-2.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@pulse.example.com',
+        copyText: '© 2026 Pulse. All rights reserved.'
+      },
+      {
+        name: 'Budge 记账本',
+        nameZh: '随手记账',
+        logo: 'images/logos/6.jpg',
+        slogan: 'Simple budgeting. 简单记一笔，账本更清晰。',
+        intro: 'Budge 是轻量级记账与预算工具。分类记流水、设月度预算、看收支趋势，无广告无订阅，数据存本地，隐私有保障。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/6-1.jpg', 'images/screens/6-2.jpg', 'images/screens/6-3.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@budge.example.com',
+        copyText: '© 2026 Budge. All rights reserved.'
+      },
+      {
+        name: 'Lingo 背单词',
+        nameZh: '每日单词',
+        logo: 'images/logos/7.jpg',
+        slogan: 'Learn words, one day at a time. 每天几分钟，词汇稳提升。',
+        intro: 'Lingo 提供词书、例句与遗忘曲线复习。支持多语种与自定义词库，离线可用，界面简洁，适合碎片化学习。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/7-1.jpg', 'images/screens/7-2.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@lingo.example.com',
+        copyText: '© 2026 Lingo. All rights reserved.'
+      },
+      {
+        name: 'Calm 冥想',
+        nameZh: '正念冥想',
+        logo: 'images/logos/8.jpg',
+        slogan: 'Breathe. Focus. Rest. 呼吸、专注、放松。',
+        intro: 'Calm 提供引导式冥想、呼吸练习与白噪音。短时放松或深度冥想均可，助你减压、助眠、提升专注。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/8-1.jpg', 'images/screens/8-2.jpg', 'images/screens/8-3.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@calm.example.com',
+        copyText: '© 2026 Calm. All rights reserved.'
+      },
+      {
+        name: 'Link 快捷',
+        nameZh: '快捷指令',
+        logo: 'images/logos/9.jpg',
+        slogan: 'Automate the small things. 把重复的事交给 Link。',
+        intro: 'Link 支持自定义快捷指令与自动化流程。一键执行常用操作、定时任务、多应用联动，提升效率。',
+        appStore: 'https://apps.apple.com/',
+        playStore: 'https://play.google.com/',
+        screens: ['images/screens/9-1.jpg', 'images/screens/9-2.jpg'],
+        terms: 'terms.html',
+        privacy: 'privacy.html',
+        contactEmail: 'service@link.example.com',
+        copyText: '© 2026 Link. All rights reserved.'
+      }
+    ];
+
+    function escapeAttr(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    var currentAppIndex = 0;
+
+    (function applyUrlAndDefault() {
+      var params = new URLSearchParams(window.location.search);
+      var appParam = params.get('app');
+      if (appParam !== null && appParam !== '') {
+        var idx = parseInt(appParam, 10);
+        if (!isNaN(idx) && idx >= 0 && idx < APP_LIST.length) {
+          currentAppIndex = idx;
+          return;
+        }
+      }
+      currentAppIndex = (typeof DEFAULT_APP_INDEX !== 'undefined' && DEFAULT_APP_INDEX >= 0 && DEFAULT_APP_INDEX < APP_LIST.length)
+        ? DEFAULT_APP_INDEX
+        : 0;
+    })();
+
+    function getApp() {
+      return APP_LIST[currentAppIndex] || APP_LIST[0];
+    }
+
+    function getTheme() {
+      return THEMES[currentAppIndex] || THEMES[0];
+    }
+
+    function render() {
+      var app = getApp();
+      var theme = getTheme();
+      document.body.setAttribute('data-theme', theme);
+
+      document.title = (app.nameZh || app.name) + ' - ' + (app.nameZh ? app.name : '官网');
+      document.getElementById('top-logo').src = app.logo;
+      document.getElementById('top-logo').alt = app.name;
+      document.getElementById('top-name').textContent = app.name;
+
+      document.getElementById('hero-logo').src = app.logo;
+      document.getElementById('hero-logo').alt = app.name;
+      document.getElementById('hero-title').textContent = app.name;
+      document.getElementById('hero-slogan').textContent = app.slogan || '';
+
+      var introEl = document.getElementById('hero-intro');
+      if (app.intro && app.intro.trim()) {
+        introEl.textContent = app.intro.trim();
+        introEl.style.display = 'block';
+      } else {
+        introEl.style.display = 'none';
+      }
+
+      var svgAppStore = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>';
+      var svgGooglePlay = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17C3 2.91 3.34 2.39 3.84 2.15L13.69 12 3.84 21.85C3.34 21.6 3 21.09 3 20.5zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.25.92-.59 1.19l-2.27 1.32L15.39 12l2.27-2.27 2.27 1.32zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>';
+      var btns = [];
+      if (app.appStore) btns.push('<a href="' + escapeAttr(app.appStore) + '" class="btn-dl ios" target="_blank" rel="noopener noreferrer">' + svgAppStore + 'App Store 下载</a>');
+      if (app.playStore) btns.push('<a href="' + escapeAttr(app.playStore) + '" class="btn-dl android" target="_blank" rel="noopener noreferrer">' + svgGooglePlay + 'Google Play 下载</a>');
+      var btnsEl = document.getElementById('hero-btns');
+      btnsEl.innerHTML = btns.join('');
+      btnsEl.style.display = btns.length ? 'flex' : 'none';
+
+      var screensEl = document.getElementById('hero-screens');
+      var innerEl = document.getElementById('hero-screens-inner');
+      if (app.screens && app.screens.length > 0) {
+        innerEl.innerHTML = app.screens.map(function (src) {
+          return '<div class="screen-item"><img src="' + escapeAttr(src) + '" alt=""></div>';
+        }).join('');
+        screensEl.style.display = 'block';
+      } else {
+        screensEl.style.display = 'none';
+      }
+
+      var email = (app.contactEmail || 'service@example.com').trim();
+      var links = [];
+      links.push('<a href="' + escapeAttr(app.terms) + '?app=' + currentAppIndex + '" target="_blank" rel="noopener">用户协议</a>');
+      links.push('<a href="' + escapeAttr(app.privacy) + '?app=' + currentAppIndex + '" target="_blank" rel="noopener">隐私协议</a>');
+      links.push('<span class="contact-copy" id="footer-contact" data-email="' + escapeAttr(email) + '" role="button" tabindex="0">联系我们：' + escapeHtml(email) + '</span>');
+      document.getElementById('footer-links').innerHTML = links.join('<span style="margin:0 10px;color:var(--text-muted)">·</span>');
+      document.getElementById('footer-copy').textContent = app.copyText || ('© ' + new Date().getFullYear() + ' ' + app.name + '. All rights reserved.');
+
+      var contactEl = document.getElementById('footer-contact');
+      if (contactEl) {
+        contactEl.onclick = function () {
+          var em = this.getAttribute('data-email') || '';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(em).then(showToast);
+          } else {
+            var ta = document.createElement('textarea'); ta.value = em; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast();
+          }
+        };
+        contactEl.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.onclick(); } };
+      }
+      var trigger = document.getElementById('app-dropdown-trigger');
+      if (trigger) trigger.textContent = (app.nameZh ? app.nameZh + ' / ' : '') + app.name;
+      var panel = document.getElementById('app-dropdown-panel');
+      if (panel) panel.querySelectorAll('.app-dropdown-item').forEach(function (btn) {
+        btn.classList.toggle('active', parseInt(btn.getAttribute('data-index'), 10) === currentAppIndex);
+      });
+    }
+    function escapeHtml(s) {
+      var div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function updateAppDropdownLabel() {
+      var app = APP_LIST[currentAppIndex];
+      var label = app ? (app.nameZh ? app.nameZh + ' / ' : '') + app.name : '请选择';
+      var trigger = document.getElementById('app-dropdown-trigger');
+      if (trigger) trigger.textContent = label;
+    }
+
+    function initAppSelect() {
+      var trigger = document.getElementById('app-dropdown-trigger');
+      var panel = document.getElementById('app-dropdown-panel');
+      if (!trigger || !panel) return;
+
+      panel.innerHTML = APP_LIST.map(function (app, i) {
+        return '<button type="button" class="app-dropdown-item' + (i === currentAppIndex ? ' active' : '') + '" data-index="' + i + '" role="option">' + escapeHtml(app.nameZh ? app.nameZh + ' / ' : '') + app.name + '</button>';
+      }).join('');
+
+      updateAppDropdownLabel();
+      panel.querySelectorAll('.app-dropdown-item').forEach(function (btn) {
+        if (parseInt(btn.getAttribute('data-index'), 10) === currentAppIndex) btn.classList.add('active');
+      });
+
+      function closePanel() {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      function openPanel() {
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (panel.classList.contains('open')) closePanel();
+        else openPanel();
+      });
+
+      panel.addEventListener('click', function (e) {
+        var item = e.target.closest('.app-dropdown-item');
+        if (!item) return;
+        e.stopPropagation();
+        var idx = parseInt(item.getAttribute('data-index'), 10);
+        currentAppIndex = idx;
+        closePanel();
+        updateAppDropdownLabel();
+        panel.querySelectorAll('.app-dropdown-item').forEach(function (btn) {
+          btn.classList.toggle('active', parseInt(btn.getAttribute('data-index'), 10) === idx);
+        });
+        render();
+        try { localStorage.setItem('app-index', currentAppIndex); } catch (err) {}
+      });
+
+      document.addEventListener('click', function () { closePanel(); });
+    }
+
+    initAppSelect();
+    render();
+    updateAppDropdownLabel();
+  </script>
 </body>
 </html>

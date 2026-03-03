@@ -3,87 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - App Name</title>
+  <title>隐私协议</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg-dark: #0B0F1A;
+      --bg-mid: #12162A;
+      --cyan: #00E5FF;
+      --teal: #3AF0C3;
+      --text-primary: #E8ECF4;
+      --text-muted: #8B95A8;
+      --max-width: 800px;
     }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #e8f4fc 0%, #eef6fa 35%, #f2f5f9 70%, #f5f6f8 100%);
-      color: #333;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-mid) 50%, #0d1220 100%);
+      color: var(--text-primary);
       min-height: 100vh;
+      line-height: 1.7;
+    }
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+      padding: 0.75rem 0;
+    }
+    .header-inner {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      line-height: 1.6;
+      gap: 12px;
     }
-
-    .page {
-      width: 100%;
-      max-width: 800px;
-      background: rgba(255, 255, 255, 0.75);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    .header-inner a { text-decoration: none; color: inherit; }
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      object-fit: cover;
     }
+    .header-app-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .content p {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
+    main { padding: 1.5rem 0 3rem; }
     .back-link {
       display: inline-block;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      color: #007AFF;
+      color: var(--cyan);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s ease;
+      margin-bottom: 1.5rem;
     }
+    .back-link:hover { color: var(--teal); }
+    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .page-title-zh { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
 
-    .back-link:hover {
-      color: #0056b3;
-      text-decoration: underline;
+    .content {
+      background: rgba(18, 25, 45, 0.5);
+      border: 1px solid rgba(0, 229, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
     }
+    .content h3 { font-size: 1.1rem; color: var(--teal); margin: 1.5rem 0 0.5rem; }
+    .content h3:first-child { margin-top: 0; }
+    .content p, .content li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .content ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    main { padding-bottom: 2rem; }
   </style>
 </head>
 <body>
-  <div class="page">
-    <h1>Privacy Policy</h1>
+  <div class="wrap">
+    <header>
+      <div class="header-inner">
+        <a href="index.html" id="header-link">
+          <img id="header-logo" class="header-logo" src="" alt="">
+        </a>
+        <span id="header-app-name" class="header-app-name"></span>
+      </div>
+    </header>
 
-    <div class="content">
-      <p>
-        This Privacy Policy describes how App Name ("we", "our", or "us") collects, uses, and shares information when you use our application and related services.
-      </p>
-      <p>
-        We may collect information you provide directly, such as account details and preferences, as well as usage data to improve our services. We do not sell your personal information to third parties.
-      </p>
-      <p>
-        We use industry-standard security measures to protect your data. By using our app, you agree to the practices described in this policy. We may update this policy from time to time; continued use constitutes acceptance of changes.
-      </p>
-      <p>
-        If you have questions about this Privacy Policy, please contact us through the channels provided in the app or on our website.
-      </p>
-    </div>
-
-    <a href="index.html" class="back-link">← 返回首页</a>
+    <main>
+      <a href="index.html" class="back-link">← 返回首页</a>
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-title-zh">隐私协议</p>
+      <article class="content" id="privacy-content"></article>
+    </main>
   </div>
+
+  <script>
+    // 与 index.html 中 APP_LIST 顺序一致（共 10 个）
+    var APP_NAMES = ['TravelSpeed Pro', 'FitPal 动起来', 'Notely 轻笔记', 'SkyCast 天气', 'Moment 相册', 'Pulse 心率', 'Budge 记账本', 'Lingo 背单词', 'Calm 冥想', 'Link 快捷'];
+    var APP_NAMES_ZH = ['旅行测速仪', '运动助手', '极简笔记', '精准天气', '智能相册', '心率健康', '随手记账', '每日单词', '正念冥想', '快捷指令'];
+    var APP_LOGOS = [
+      'images/logos/0.jpg',
+      'images/logos/1.jpg',
+      'images/logos/2.jpg',
+      'images/logos/3.jpg',
+      'images/logos/4.jpg',
+      'images/logos/5.jpg',
+      'images/logos/6.jpg',
+      'images/logos/7.jpg',
+      'images/logos/8.jpg',
+      'images/logos/9.jpg'
+    ];
+
+    var params = new URLSearchParams(window.location.search);
+    var appIndex = parseInt(params.get('app'), 10);
+    if (isNaN(appIndex) || appIndex < 0 || appIndex >= APP_NAMES.length) appIndex = 0;
+
+    var appName = APP_NAMES[appIndex];
+    var appLogo = APP_LOGOS[appIndex];
+
+    document.title = appName + ' - 隐私协议';
+    document.getElementById('header-app-name').textContent = appName;
+    document.getElementById('header-logo').src = appLogo;
+    document.getElementById('header-logo').alt = appName;
+    document.getElementById('header-link').href = 'index.html';
+
+    /**
+     * 每个 App 的隐私协议正文独立配置。
+     * 修改下方 PRIVACY_BY_APP[i] 即可更新第 i 个 App 的隐私政策内容（i 从 0 到 9，与 APP_NAMES 顺序一致）。
+     */
+    var PRIVACY_BY_APP = [
+      '<p><strong>最后更新：</strong>TravelSpeed Pro 尊重您的隐私。本政策说明我们如何收集、使用、存储与保护您的个人信息。</p><h3>1. 我们收集的信息</h3><p>为提供测速与行程记录功能，我们可能收集位置、设备信息及使用数据。位置数据仅在您使用测速或记录功能时获取，且可在系统设置中关闭。</p><h3>2. 信息使用与存储</h3><p>数据用于提供与改进服务、保障安全。我们尽可能在设备端处理轨迹与速度数据，不会将您的个人位置信息出售给第三方。</p><h3>3. 共享与披露</h3><p>除法律要求或经您同意外，我们不会与第三方共享您的个人数据。受托方仅可为实现服务目的处理数据，并受保密义务约束。</p><h3>4. 您的权利与政策更新</h3><p>您可访问、更正、删除您的数据或联系我们行使权利。我们可能适时更新本政策，重大变更将通过应用或官网公布。</p>',
+      '<p><strong>FitPal 动起来 隐私政策</strong></p><p>FitPal 重视您的隐私。本政策适用于运动与健康相关数据的处理。</p><h3>一、收集的数据类型</h3><p>我们可能收集：运动记录（步数、跑步、骑行等）、设备信息、使用习惯。部分数据来自系统健康或穿戴设备，仅在您授权后获取。</p><h3>二、使用目的</h3><p>用于展示您的运动统计、趋势与成就；改进产品体验；保障服务安全。我们不会将您的运动或健康数据用于广告定向或出售。</p><h3>三、存储与安全</h3><p>数据在安全环境中存储，保留期限为实现目的所必需或法律要求。您可在应用内删除历史记录。</p><h3>四、共享与您的权利</h3><p>未经您同意，我们不会向第三方提供您的个人运动数据。您有权查询、更正、删除数据或联系我们投诉。</p>',
+      '<p><strong>Notely 轻笔记 隐私政策</strong></p><p>您的笔记与待办内容属于敏感信息，我们仅为实现服务功能而处理。</p><h3>1. 我们处理的数据</h3><p>您创建的笔记、待办、标签及同步与设备信息。若您启用云同步，内容将加密存储于我们的服务器。</p><h3>2. 使用方式</h3><p>我们使用上述数据以提供编辑、同步、搜索与备份功能。我们不会将您的内容用于广告、分析或向第三方披露，法律要求除外。</p><h3>3. 安全与保留</h3><p>我们采用加密与访问控制保护您的数据。您可随时导出或删除账户及全部内容。</p><h3>4. 权利与更新</h3><p>您享有访问、更正、删除及数据可携带等权利。本政策可能更新，请以应用内或官网最新版为准。</p>',
+      '<p><strong>SkyCast 天气 隐私政策</strong></p><p>SkyCast 对个人信息的收集保持最小化原则。</p><h3>一、收集范围</h3><p>我们可能收集：您添加的关注城市、设备信息、应用使用情况（如崩溃日志）。天气数据本身通常不涉及个人身份信息。</p><h3>二、使用与共享</h3><p>城市列表用于为您展示当地天气；使用数据用于改进应用稳定性与体验。我们不会出售您的个人信息。天气数据可能来自第三方服务商，其处理受其隐私政策约束。</p><h3>三、存储与权利</h3><p>数据在必要期限内保留。您可清除关注城市或卸载应用。如有疑问可联系我们。</p>',
+      '<p><strong>Moment 相册 隐私政策</strong></p><p>相册与照片涉及高度敏感信息，我们严格保护您的照片与元数据。</p><h3>1. 我们处理的信息</h3><p>您选择上传或同步的照片、视频及其元数据（如拍摄时间、地点）。我们仅在您明确授权后访问设备相册。</p><h3>2. 使用目的</h3><p>用于整理、备份、人脸或地点分类及跨设备同步。我们不会将您的照片或人脸数据用于识别、广告或提供给第三方，法律要求除外。</p><h3>3. 安全与存储</h3><p>照片在传输与存储时加密。您可随时删除云端备份或关闭同步。删除后我们将按流程清除数据。</p><h3>4. 您的权利</h3><p>您可访问、下载、删除您的照片与账户数据。本政策变更将通过应用或官网通知。</p>',
+      '<p><strong>Pulse 心率 隐私政策</strong></p><p>心率与健康数据为敏感信息，我们按最小必要原则处理。</p><h3>一、数据类型</h3><p>我们可能收集：心率数据、运动时段、设备信息。数据可能来自手机传感器或您连接的穿戴设备，且仅在您授权后获取。</p><h3>二、使用与保护</h3><p>数据用于展示您的心率趋势、统计与提醒功能。我们不会将健康数据用于广告或出售。数据在本地或加密云端存储，访问受控。</p><h3>三、共享与披露</h3><p>未经您同意，我们不会向第三方提供您的健康数据，法律或监管要求除外。</p><h3>四、权利与政策更新</h3><p>您可删除历史数据或账户。我们可能更新本政策，请定期查阅。</p>',
+      '<p><strong>Budge 记账本 隐私政策</strong></p><p>记账数据涉及财务与消费习惯，我们重视其安全与隐私。</p><h3>1. 我们收集的数据</h3><p>您主动录入的收支、分类、预算及备注。当前版本以本地存储为主；若未来提供云同步，将另行说明服务器端处理方式。</p><h3>2. 使用目的</h3><p>仅用于在您的设备上展示统计、报表与预算提醒。我们不会将您的记账明细用于广告、分析或与第三方共享，法律要求除外。</p><h3>3. 安全与删除</h3><p>本地数据受系统与应用权限保护。您可随时清除应用数据或卸载。若存在云端备份，您可请求我们删除。</p><h3>4. 政策变更</h3><p>我们可能修订本政策，修订后将通过应用或官网公布。</p>',
+      '<p><strong>Lingo 背单词 隐私政策</strong></p><p>Lingo 处理与学习相关的数据，以提供个性化学习体验。</p><h3>一、收集的信息</h3><p>学习进度、生词本、复习记录、设备与使用数据。我们不会收集与学习无关的敏感信息。</p><h3>二、使用方式</h3><p>用于计算复习计划、展示统计与同步多设备进度。我们可能使用匿名化或聚合数据改进产品，不会将您的学习记录用于广告定向或出售。</p><h3>三、存储与共享</h3><p>数据在安全环境中存储。未经您同意，我们不会向第三方提供您的学习数据。</p><h3>四、您的权利</h3><p>您可清除学习进度、导出数据或联系我们行使访问、更正、删除等权利。本政策可能更新。</p>',
+      '<p><strong>Calm 冥想 隐私政策</strong></p><p>Calm 注重您在使用冥想与放松功能时的隐私与安全感。</p><h3>1. 我们处理的数据</h3><p>使用记录（如练习时长、偏好设置）、设备信息及可选账户信息。我们不会收集您冥想时的生理或心理评估数据，除非您主动参与相关功能并同意。</p><h3>2. 使用与保护</h3><p>数据用于提供个性化推荐、记录进度与改进服务。我们采用合理措施保护数据安全，不会将您的使用记录出售给第三方。</p><h3>3. 共享与权利</h3><p>除法律要求或经您同意外，我们不会共享您的个人数据。您可删除账户或联系我们行使权利。</p><h3>4. 政策更新</h3><p>我们可能适时修订本政策，请以应用内或官网为准。</p>',
+      '<p><strong>Link 快捷 隐私政策</strong></p><p>Link 在您运行快捷指令时可能访问系统权限与数据，我们仅为实现功能所必需而处理。</p><h3>一、涉及的数据</h3><p>根据您创建的指令，可能涉及：剪贴板、位置、通知、文件等。我们仅在您授权且指令执行时访问，不会在后台持续采集。</p><h3>二、使用与存储</h3><p>指令配置与运行日志可能存储在本地或您的账户下，用于同步与故障排查。我们不会将您的指令内容或执行数据用于广告或向第三方提供。</p><h3>三、安全与权利</h3><p>我们建议您仅添加可信指令来源。您可随时删除指令或账户数据。本政策可能更新，请留意应用或官网通知。</p>'
+    ];
+
+    var content = PRIVACY_BY_APP[appIndex] != null ? PRIVACY_BY_APP[appIndex] : PRIVACY_BY_APP[0];
+    document.getElementById('privacy-content').innerHTML = content;
+  </script>
 </body>
 </html>
