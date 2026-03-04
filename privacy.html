@@ -51,7 +51,7 @@
     }
     .header-app-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
-    main { padding: 1.5rem 0 3rem; }
+    main { padding: 0.5rem 0 3rem; }
     .back-link {
       display: inline-block;
       color: var(--cyan);
@@ -60,8 +60,7 @@
       margin-bottom: 1.5rem;
     }
     .back-link:hover { color: var(--teal); }
-    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
-    .page-title-zh { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
 
     .content {
       background: rgba(18, 25, 45, 0.5);
@@ -80,17 +79,13 @@
   <div class="wrap">
     <header>
       <div class="header-inner">
-        <a href="index.html" id="header-link">
-          <img id="header-logo" class="header-logo" src="" alt="">
-        </a>
+        <img id="header-logo" class="header-logo" src="" alt="">
         <span id="header-app-name" class="header-app-name"></span>
       </div>
     </header>
 
     <main>
-      <a href="index.html" class="back-link">← 返回首页</a>
       <h1 class="page-title">Privacy Policy</h1>
-      <p class="page-title-zh">隐私协议</p>
       <article class="content" id="privacy-content"></article>
     </main>
   </div>
@@ -119,18 +114,27 @@
     var appName = APP_NAMES[appIndex];
     var appLogo = APP_LOGOS[appIndex];
 
+    function setImageSrcWithFallback(img, path) {
+      if (!img || !path) return;
+      img.src = path;
+      img.onerror = function () {
+        img.onerror = null;
+        var other = path.replace(/\.(jpe?g|png)$/i, function (m) { return /\.(jpe?g)$/i.test(m) ? '.png' : '.jpg'; });
+        if (other !== path) img.src = other;
+      };
+    }
+
     document.title = appName + ' - 隐私协议';
     document.getElementById('header-app-name').textContent = appName;
-    document.getElementById('header-logo').src = appLogo;
+    setImageSrcWithFallback(document.getElementById('header-logo'), appLogo);
     document.getElementById('header-logo').alt = appName;
-    document.getElementById('header-link').href = 'index.html';
 
     /**
      * 每个 App 的隐私协议正文独立配置。
      * 修改下方 PRIVACY_BY_APP[i] 即可更新第 i 个 App 的隐私政策内容（i 从 0 到 9，与 APP_NAMES 顺序一致）。
      */
     var PRIVACY_BY_APP = [
-      '<p><strong>最后更新：</strong>TravelSpeed Pro 尊重您的隐私。本政策说明我们如何收集、使用、存储与保护您的个人信息。</p><h3>1. 我们收集的信息</h3><p>为提供测速与行程记录功能，我们可能收集位置、设备信息及使用数据。位置数据仅在您使用测速或记录功能时获取，且可在系统设置中关闭。</p><h3>2. 信息使用与存储</h3><p>数据用于提供与改进服务、保障安全。我们尽可能在设备端处理轨迹与速度数据，不会将您的个人位置信息出售给第三方。</p><h3>3. 共享与披露</h3><p>除法律要求或经您同意外，我们不会与第三方共享您的个人数据。受托方仅可为实现服务目的处理数据，并受保密义务约束。</p><h3>4. 您的权利与政策更新</h3><p>您可访问、更正、删除您的数据或联系我们行使权利。我们可能适时更新本政策，重大变更将通过应用或官网公布。</p>',
+      '<p><strong>Developed by Geredol Verto</strong></p><p>Geredol Verto ("Developer", "we", "our", or "us") operates the mobile application TravelSpeed Pro (the "App").</p><p>This Privacy Policy explains how we collect, use, and protect information when you use our App.</p><h3>1. Information We Collect</h3><h3>1.1 Location Information</h3><p>TravelSpeed Pro uses GPS location data to:</p><ul><li>Measure real-time speed</li><li>Calculate distance traveled</li><li>Record routes and travel sessions</li><li>Display route history</li><li>Support background speed tracking</li></ul><p>We may collect:</p><ul><li>Precise location (GPS coordinates)</li><li>Speed data derived from location</li><li>Distance calculations</li><li>Timestamp data related to travel sessions</li></ul><p>Location data may be collected while the App is in use and, if enabled by the user, in the background.</p><p>We do not use location data for advertising or tracking across other apps.</p><h3>1.2 Usage Data</h3><p>We may collect limited, non-personal usage data such as:</p><ul><li>App session duration</li><li>Feature usage statistics</li><li>Crash logs and diagnostics</li></ul><p>This information is used solely to improve app performance and stability.</p><h3>1.3 Information We Do Not Collect</h3><p>We do NOT collect:</p><ul><li>Name</li><li>Email address (unless you voluntarily contact us)</li><li>Contacts</li><li>Photos</li><li>Payment information</li><li>Social media accounts</li></ul><h3>2. How We Use Your Information</h3><p>We use collected data to:</p><ul><li>Provide speed measurement functionality</li><li>Calculate travel statistics</li><li>Improve app performance</li><li>Fix bugs and crashes</li><li>Ensure compliance with App Store requirements</li></ul><h3>3. Data Storage</h3><p>Location and travel history data are stored locally on your device.</p><p>We do not sell, rent, or share your personal data with third parties.</p><p>If cloud backup is enabled on your device, data may be included in encrypted iCloud backups managed by Apple.</p><h3>4. Background Location Usage</h3><p>If you enable background location updates, the App may continue collecting GPS data when running in the background to:</p><ul><li>Maintain accurate speed tracking</li><li>Record uninterrupted travel sessions</li></ul><p>Continued use of GPS running in the background can significantly reduce battery life.</p><h3>5. Data Sharing</h3><p>We do not:</p><ul><li>Sell personal data</li><li>Share personal data for advertising</li><li>Track users across third-party apps</li></ul><p>Data may only be shared if required by law.</p><h3>6. Data Security</h3><p>We implement reasonable safeguards to protect your information.</p><p>However, no electronic transmission or storage system is 100% secure.</p><h3>7. Children\'s Privacy</h3><p>TravelSpeed Pro is not directed to children under 13.</p><p>We do not knowingly collect personal data from children.</p><h3>8. Your Rights</h3><p>Depending on your region, you may have rights to:</p><ul><li>Access your data</li><li>Delete your data</li><li>Request clarification regarding data usage</li></ul><p>Since most data is stored locally, you can delete it by removing the App.</p><h3>9. Changes to This Policy</h3><p>We may update this Privacy Policy from time to time.</p><p>Updated versions will be posted with a new effective date.</p><h3>10. Contact Information</h3><p><strong>Developer:</strong> Geredol Verto</p><p>For privacy-related questions, please contact: gjtoolservice@outlook.com</p>',
       '<p><strong>FitPal 动起来 隐私政策</strong></p><p>FitPal 重视您的隐私。本政策适用于运动与健康相关数据的处理。</p><h3>一、收集的数据类型</h3><p>我们可能收集：运动记录（步数、跑步、骑行等）、设备信息、使用习惯。部分数据来自系统健康或穿戴设备，仅在您授权后获取。</p><h3>二、使用目的</h3><p>用于展示您的运动统计、趋势与成就；改进产品体验；保障服务安全。我们不会将您的运动或健康数据用于广告定向或出售。</p><h3>三、存储与安全</h3><p>数据在安全环境中存储，保留期限为实现目的所必需或法律要求。您可在应用内删除历史记录。</p><h3>四、共享与您的权利</h3><p>未经您同意，我们不会向第三方提供您的个人运动数据。您有权查询、更正、删除数据或联系我们投诉。</p>',
       '<p><strong>Notely 轻笔记 隐私政策</strong></p><p>您的笔记与待办内容属于敏感信息，我们仅为实现服务功能而处理。</p><h3>1. 我们处理的数据</h3><p>您创建的笔记、待办、标签及同步与设备信息。若您启用云同步，内容将加密存储于我们的服务器。</p><h3>2. 使用方式</h3><p>我们使用上述数据以提供编辑、同步、搜索与备份功能。我们不会将您的内容用于广告、分析或向第三方披露，法律要求除外。</p><h3>3. 安全与保留</h3><p>我们采用加密与访问控制保护您的数据。您可随时导出或删除账户及全部内容。</p><h3>4. 权利与更新</h3><p>您享有访问、更正、删除及数据可携带等权利。本政策可能更新，请以应用内或官网最新版为准。</p>',
       '<p><strong>SkyCast 天气 隐私政策</strong></p><p>SkyCast 对个人信息的收集保持最小化原则。</p><h3>一、收集范围</h3><p>我们可能收集：您添加的关注城市、设备信息、应用使用情况（如崩溃日志）。天气数据本身通常不涉及个人身份信息。</p><h3>二、使用与共享</h3><p>城市列表用于为您展示当地天气；使用数据用于改进应用稳定性与体验。我们不会出售您的个人信息。天气数据可能来自第三方服务商，其处理受其隐私政策约束。</p><h3>三、存储与权利</h3><p>数据在必要期限内保留。您可清除关注城市或卸载应用。如有疑问可联系我们。</p>',

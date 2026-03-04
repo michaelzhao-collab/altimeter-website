@@ -51,7 +51,7 @@
     }
     .header-app-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
-    main { padding: 1.5rem 0 3rem; }
+    main { padding: 0.5rem 0 3rem; }
     .back-link {
       display: inline-block;
       color: var(--cyan);
@@ -60,8 +60,7 @@
       margin-bottom: 1.5rem;
     }
     .back-link:hover { color: var(--teal); }
-    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
-    .page-title-zh { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .page-title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
 
     .content {
       background: rgba(18, 25, 45, 0.5);
@@ -80,17 +79,13 @@
   <div class="wrap">
     <header>
       <div class="header-inner">
-        <a href="index.html" id="header-link">
-          <img id="header-logo" class="header-logo" src="" alt="">
-        </a>
+        <img id="header-logo" class="header-logo" src="" alt="">
         <span id="header-app-name" class="header-app-name"></span>
       </div>
     </header>
 
     <main>
-      <a href="index.html" class="back-link">← 返回首页</a>
       <h1 class="page-title">Terms of Service</h1>
-      <p class="page-title-zh">用户协议</p>
       <article class="content" id="terms-content"></article>
     </main>
   </div>
@@ -119,18 +114,27 @@
     var appName = APP_NAMES[appIndex];
     var appLogo = APP_LOGOS[appIndex];
 
+    function setImageSrcWithFallback(img, path) {
+      if (!img || !path) return;
+      img.src = path;
+      img.onerror = function () {
+        img.onerror = null;
+        var other = path.replace(/\.(jpe?g|png)$/i, function (m) { return /\.(jpe?g)$/i.test(m) ? '.png' : '.jpg'; });
+        if (other !== path) img.src = other;
+      };
+    }
+
     document.title = appName + ' - 用户协议';
     document.getElementById('header-app-name').textContent = appName;
-    document.getElementById('header-logo').src = appLogo;
+    setImageSrcWithFallback(document.getElementById('header-logo'), appLogo);
     document.getElementById('header-logo').alt = appName;
-    document.getElementById('header-link').href = 'index.html';
 
     /**
      * 每个 App 的用户协议正文独立配置。
      * 修改下方 TERMS_BY_APP[i] 即可更新第 i 个 App 的协议内容（i 从 0 到 9，与 APP_NAMES 顺序一致）。
      */
     var TERMS_BY_APP = [
-      '<p><strong>最后更新：</strong>本协议是您与「TravelSpeed Pro」之间关于使用本应用及相关服务的法律协议。请您仔细阅读。</p><h3>1. 接受条款</h3><p>下载、安装或使用本应用即表示您同意受本用户协议约束。若不同意，请勿使用本服务。</p><h3>2. 服务说明</h3><p>本应用提供与产品描述相符的功能与服务。我们保留在不另行通知的情况下修改、暂停或终止部分或全部服务的权利。</p><h3>3. 使用规范</h3><p>您同意合法、合规使用本应用，不得利用本应用从事任何违反法律法规或侵犯他人权益的行为。您须对使用本应用所产生的行为与内容负责。</p><h3>4. 知识产权</h3><p>本应用及相关内容的知识产权归我们或相关权利人所有。未经授权，您不得复制、修改、传播或用于商业目的。</p><h3>5. 免责声明</h3><p>在法律允许的范围内，本应用按「现状」提供，我们不保证服务不中断、无错误或完全安全。</p><h3>6. 协议变更与联系我们</h3><p>我们可能不时修订本协议。如对本协议有疑问，请通过应用内或官网提供的联系方式与我们联系。</p>',
+      '<p>By downloading or using TravelSpeed Pro (the "App"), you agree to these Terms of Service.</p><h3>1. Acceptance of Terms</h3><p>By using this App, you agree to comply with these Terms.</p><p>If you do not agree, do not use the App.</p><h3>2. Description of Service</h3><p>TravelSpeed Pro provides:</p><ul><li>GPS-based speed measurement</li><li>Distance tracking</li><li>Route recording</li><li>Travel statistics</li><li>Multi-mode travel tracking</li></ul><p>The App relies on device GPS functionality and system services.</p><p>Accuracy may vary depending on signal strength and environmental conditions.</p><h3>3. User Responsibilities</h3><p>You agree:</p><ul><li>To use the App legally</li><li>Not to misuse GPS tracking features</li><li>Not to rely on the App for official speed enforcement</li><li>Not to use the App in unsafe situations (e.g., while driving without proper mounting)</li></ul><p>You are responsible for your safety while using the App.</p><h3>4. No Warranty</h3><p>The App is provided "as is" without warranties of any kind.</p><p>Geredol Verto does not guarantee:</p><ul><li>Continuous availability</li><li>100% speed accuracy</li><li>Uninterrupted operation</li></ul><h3>5. Limitation of Liability</h3><p>To the fullest extent permitted by law:</p><p>Geredol Verto shall not be liable for:</p><ul><li>Indirect or incidental damages</li><li>Data loss</li><li>Personal injury resulting from misuse</li><li>Battery consumption due to GPS use</li></ul><h3>6. Background Location Notice</h3><p>If enabled, the App may continue using GPS in the background.</p><p>This may significantly reduce battery life.</p><p>Users can disable background location at any time in system settings.</p><h3>7. Intellectual Property</h3><p>All app content, design, and branding are owned by Geredol Verto.</p><p>You may not copy, modify, or redistribute the App without permission.</p><h3>8. Termination</h3><p>We reserve the right to suspend or terminate access if misuse is detected.</p><p>Users may stop using the App at any time by uninstalling it.</p><h3>9. Governing Law</h3><p>These Terms shall be governed by applicable laws in the user\'s jurisdiction.</p><h3>10. Contact Information</h3><p><strong>Developer:</strong> Geredol Verto</p><p><strong>Support Email:</strong> gjtoolservice@outlook.com</p>',
       '<p><strong>FitPal 动起来 用户协议</strong></p><p>欢迎使用 FitPal。使用本应用即表示您同意以下条款。</p><h3>一、服务内容</h3><p>FitPal 提供运动记录、计划与统计等功能。我们有权根据产品规划调整功能与界面。</p><h3>二、用户义务</h3><p>您应如实记录数据，不得利用本应用进行任何欺诈或误导行为。运动与健康相关数据仅供参考，不构成医疗建议。</p><h3>三、数据与隐私</h3><p>您的运动数据将按照我们的隐私政策处理。您可在设置中管理或删除数据。</p><h3>四、免责与责任限制</h3><p>因运动或使用本应用产生的任何身体损伤或损失，我们概不负责。请根据自身情况合理安排运动强度。</p><h3>五、条款更新</h3><p>我们可能更新本协议，重大变更将通过应用内通知或官网公布。</p>',
       '<p><strong>Notely 轻笔记 服务条款</strong></p><p>请在使用 Notely 前阅读本条款。</p><h3>1. 协议接受</h3><p>使用本应用即表示您接受本服务条款及隐私政策。</p><h3>2. 服务范围</h3><p>Notely 提供笔记、待办与同步服务。我们不对因网络或设备问题导致的数据延迟或丢失承担责任，建议您重要内容另行备份。</p><h3>3. 用户内容</h3><p>您保留对您创建内容的所有权利。您授予我们为提供服务所必需的使用、存储与同步您内容的权利。</p><h3>4. 禁止行为</h3><p>您不得利用本应用存储或传播违法、侵权、淫秽或恶意内容。我们有权在发现违规时删除内容或终止您的账户。</p><h3>5. 免责与变更</h3><p>服务按「现状」提供。我们可能随时修订本条款，继续使用即视为接受修订。</p>',
       '<p><strong>SkyCast 天气 用户协议</strong></p><p>本协议适用于您对 SkyCast 天气应用的使用。</p><h3>第一条 服务说明</h3><p>SkyCast 提供天气查询、预报及相关信息展示。数据来源于第三方，我们力求准确但不保证绝对无误。</p><h3>第二条 使用限制</h3><p>您仅可将本应用用于个人、非商业的天气查询用途。不得对数据进行批量抓取、转售或用于商业分析等未经授权的用途。</p><h3>第三条 免责</h3><p>天气数据仅供参考，不构成出行或生产决策依据。因依赖本应用数据而产生的任何损失，我们不予承担。</p><h3>第四条 协议修改</h3><p>我们保留修改本协议的权利。修改后将通过应用或官网公布。</p>',
